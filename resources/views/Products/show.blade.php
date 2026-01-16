@@ -77,50 +77,57 @@
         <div class="offset-1 col-11">
             <hr class="w-100">
             <h3 class="float-left">カスタマーレビュー</h3>
-        </div>
 
-        <div class="offset-1 col-10">
-            <div class="row">
-                @foreach($reviews as $review)
-                <div class="offset-md-5 col-md-5">
-                    <h3 class="review-score-color">{{ str_repeat('★',$review->score ) }}</h3>
-                    <p class="h3">{{$review->title}}</p>
-                    <p class="h3">{{$review->content}}</p>
-                    <label>{{$review->created_at}} {{$review->user->name}}</label>
-                </div>
-                @endforeach
-            </div><br />
+            <div class="d-flex align-items-center mb-3" style="clear: both;">
+                <span class="samuraimart-star-rating" data-rate="{{ $product->getAverageScore()  }}">
+                    <span class="star-rating-front" style="width: {{ $product->getStarRatingWidth() }}"></span>
+                </span>
 
-            @auth
-            <div class="row">
-                <div class="offset-md-5 col-md-5">
-                    <form method="POST" action="{{ route('reviews.store') }}">
-                        @csrf
-                        <h4>評価</h4>
-                        <select name="score" class="form-control m-2 review-score-color">
-                            <option value="5" class="review-score-color">★★★★★</option>
-                            <option value="4" class="review-score-color">★★★★</option>
-                            <option value="3" class="review-score-color">★★★</option>
-                            <option value="2" class="review-score-color">★★</option>
-                            <option value="1" class="review-score-color">★</option>
-                        </select>
-                        <h4>タイトル</h4>
-                        @error('title')
-                        <strong>タイトルを入力してください</strong>
-                        @enderror
-                        <input type="text" name="title" class="form-control m-2">
-                        <h4>レビュー内容</h4>
-                        @error('content')
-                        <strong>レビュー内容を入力してください</strong>
-                        @enderror
-                        <textarea name="content" class="form-control m-2"></textarea>
-                        <input type="hidden" name="product_id" value="{{$product->id}}">
-                        <button type="submit" class="btn samuraimart-submit-button ml-2">レビューを追加</button>
-                    </form>
-                </div>
+                <span class="ms-2 fw-bold">{{ number_format($product->getAverageScore(),1 ) }}</span>
             </div>
-            @endauth
+
+            <div class="offset-1 col-10">
+                <div class="row">
+                    @foreach($reviews as $review)
+                    <div class="offset-md-5 col-md-5">
+                        <h3 class="review-score-color">{{ str_repeat('★',$review->score ) }}</h3>
+                        <p class="h3">{{$review->title}}</p>
+                        <p class="h3">{{$review->content}}</p>
+                        <label>{{$review->created_at}} {{$review->user->name}}</label>
+                    </div>
+                    @endforeach
+                </div><br />
+
+                @auth
+                <div class="row">
+                    <div class="offset-md-5 col-md-5">
+                        <form method="POST" action="{{ route('reviews.store') }}">
+                            @csrf
+                            <h4>評価</h4>
+                            <select name="score" class="form-control m-2 review-score-color">
+                                <option value="5" class="review-score-color">★★★★★</option>
+                                <option value="4" class="review-score-color">★★★★</option>
+                                <option value="3" class="review-score-color">★★★</option>
+                                <option value="2" class="review-score-color">★★</option>
+                                <option value="1" class="review-score-color">★</option>
+                            </select>
+                            <h4>タイトル</h4>
+                            @error('title')
+                            <strong>タイトルを入力してください</strong>
+                            @enderror
+                            <input type="text" name="title" class="form-control m-2">
+                            <h4>レビュー内容</h4>
+                            @error('content')
+                            <strong>レビュー内容を入力してください</strong>
+                            @enderror
+                            <textarea name="content" class="form-control m-2"></textarea>
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <button type="submit" class="btn samuraimart-submit-button ml-2">レビューを追加</button>
+                        </form>
+                    </div>
+                </div>
+                @endauth
+            </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection

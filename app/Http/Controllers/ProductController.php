@@ -82,6 +82,8 @@ class ProductController extends Controller
     {
         $reviews = $product->reviews()->get();
 
+        // $average_score = round($product->reviews()->avg('score'), 1) ?? 0;
+
         return view('products.show', compact('product', 'reviews'));
     }
 

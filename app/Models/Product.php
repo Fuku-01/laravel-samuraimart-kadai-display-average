@@ -34,4 +34,15 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function getAverageScore()
+    {
+        $average = $this->reviews()->avg('score');
+        return $average ? round($average,1) : 0;
+    }
+
+    public function getStarRatingWidth()
+    {
+        return ($this->getAverageScore() * 20) . '%';
+    }
 }

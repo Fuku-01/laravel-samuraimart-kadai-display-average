@@ -186,3 +186,30 @@ label {
 th, td {
   background-color: #f8fafc !important;
 }
+
+.samuraimart-star-rating {
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
+    color: #ccc;
+}
+
+/* 背面（グレーの星） */
+.samuraimart-star-rating::before {
+    content: "★★★★★";
+}
+
+/* 前面（色付きの星を重ねる土台） */
+.star-rating-front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #ffc107;
+    white-space: nowrap;
+}
+
+/* 前面の星そのもの */
+.star-rating-front::before {
+    content: "★★★★★";
+}
