@@ -149,10 +149,17 @@
                 </a>
                 <div class="row">
                     <div class="col-12">
-                        <p class="samuraimart-product-label mt-2">
+                        <div class="samuraimart-product-label mt-2 mb-3">
                             {{ $recently_product->name }}<br>
+                            <div class="d-flex align-items-center mb-1" style="clear: both;">
+                                <span class="samuraimart-star-rating" data-rate="{{ $recently_product->getAverageScore()  }}">
+                                    <span class="star-rating-front" style="width: {{ $recently_product->getStarRatingWidth() }}"></span>
+                                </span>
+
+                                <span class="ms-2 small fw-bold">{{ number_format($recently_product->getAverageScore(),1 ) }}</span>
+                            </div>
                             <label>￥{{ $recently_product->price }}</label>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
